@@ -1,6 +1,6 @@
 {
   "name": "wubsub",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A simple and fast pub/sub server and client using WebSockets and Node.js",
   "main": "index.js",
   "bin": {
@@ -20,6 +20,7 @@
     "subscribe",
     "server",
     "client",
+    "websockets",
     "message",
     "broker"
   ],
