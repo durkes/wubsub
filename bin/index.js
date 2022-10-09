@@ -14,6 +14,6 @@ const server = require('../lib/server')({ port: port });
 
 if (verbose) {
     server.verbose((output) => {
-        console.log('wubsub-server: ' + output);
+        console.log('wubsub-server:', output);
     });
 }
