@@ -1,6 +1,6 @@
 # wubsub - A simple and fast pub/sub server and client using WebSockets and Node.js
 
-wubsub uses the efficient [ws](https://www.npmjs.com/package/ws) module to broker messages between clients. Clients can publish and subscribe to send and receive messages by topic/channel.
+wubsub is built on top of the popular [ws module](https://www.npmjs.com/package/ws) to broker messages between clients. Clients can send and receive messages by topic or channel.
 
 ## How to use wubsub
 
@@ -11,7 +11,7 @@ $ npm install wubsub
 
 #### Setting up your server (server.js)
 ```js
-const pubsub = require('wubsub');
+const wubsub = require('wubsub');
 ```
 
 #### Or launch a server from the CLI
@@ -31,7 +31,7 @@ $ wubsub-server --port 3000 --verbose
 #### Setting up your client (client.js)
 Messages are published and received by clients.
 ```js
-const pubsub = require('wubsub');
+const wubsub = require('wubsub');
 ```
 
 [More examples](examples)
