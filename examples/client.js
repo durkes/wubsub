@@ -1,6 +1,6 @@
-const wubsub = require('../index.js'); // const wubsub = require('wubsub');
+const wubsub = require('wubsub');
 const client = wubsub.client({ url: 'ws://localhost:3000', retries: 10 }, (error) => {
-    // this callback will fire if the client is unable to connect after X retries
+    // this callback will fire if unable to connect after X retries
     if (error) {
         console.error(error.message);
     }

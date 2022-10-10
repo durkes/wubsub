@@ -1,5 +1,5 @@
 // this is the simplest example using nothing optional
-const wubsub = require('../index.js'); // const wubsub = require('wubsub');
+const wubsub = require('wubsub');
 
 // server.js
 const server = wubsub.server({ port: 3000 });
@@ -15,5 +15,3 @@ client.publish('channel1', 'test message 1');
 client.publish('channel1', 'test message 2');
 client.publish('channel1', 'test message 3');
 client.publish('channel1', 'test message 4');
-
-client.unsubscribe('channel1');
