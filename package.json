@@ -1,10 +1,10 @@
 {
   "name": "wubsub",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A fast and simple pub/sub server and client using WebSockets and Node.js",
   "main": "index.js",
   "bin": {
-    "wubsub": "./bin/index.js"
+    "wubsub-server": "./bin/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
