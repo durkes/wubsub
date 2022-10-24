@@ -39,10 +39,16 @@ client.verbose((output) => {
 
 // the rest of your app
 let count = 1;
-setInterval(() => {
+let sendLoop = setInterval(() => {
     client.publish('channel1', { hello: 'world', count: count++ }, (error) => {
         if (error) {
             console.error('publish error:', error.message);
         }
     });
 }, 1000);
+
+// example of graceful shutdown (usually unnecessary)
+process.on('SIGINT', () => {
+    clearInterval(sendLoop);
+    client.close();
+});
