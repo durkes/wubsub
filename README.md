@@ -22,11 +22,11 @@ $ npm install -g wubsub
 ```
 Start the server (Ctrl+C to stop)
 ```bash
-$ wubsub-server --port 3000
+$ npx wubsub-server --port 3000
 ```
 Use --verbose for console logs
 ```bash
-$ wubsub-server --port 3000 --verbose
+$ npx wubsub-server --port 3000 --verbose
 ```
 
 #### Setting up your client (client.js)
@@ -46,8 +46,15 @@ client.publish('channel1', 'test message 2');
 client.unsubscribe('channel2');
 ```
 
-## Missing something?
-See [more examples](examples) for additional features and options.
+**See [more examples](examples) for additional features and options.**
+
+## FAQ
+##### How does wubsub handle connection issues?
+By default, the client will try to reconnect to the server 10 times before returning an error. You can modify that limit to any integer or `Infinity`. See a more detailed [client example](examples/client.js) for configuring retries.
+
+##### What happens to messages if the client gets disconnected?
+Messages that a client publishes during an intermittent loss of connection will be held and sent once the connection is reestablished. If another client publishes to a topic/channel that a disconnected client is subscribed to, the disconnected client will not receive those messages (fire-and-forget pattern). If you require guaranteed delivery, you can add your own receipt handling/delivery confirmation logic.
+
 
 ### License
 [MIT](LICENSE)
