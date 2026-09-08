@@ -56,7 +56,7 @@ By default, the client will try to reconnect to the server 10 times before retur
 Any value that survives `JSON.stringify`, including falsy ones like `0`, `''`, `false` and `null`. Publishing with no message delivers `null`.
 
 ##### What happens to messages if the client gets disconnected?
-Messages that a client publishes during an intermittent loss of connection will be held and sent once the connection is reestablished. If another client publishes to a topic/channel that a disconnected client is subscribed to, the disconnected client will not receive those messages (fire-and-forget pattern). If you require guaranteed delivery, you can add your own receipt handling/delivery confirmation logic.
+Messages that a client publishes during an intermittent loss of connection will be held and sent once the connection is reestablished, in the order they were published. If the client gives up (retries exhausted) or you call `close()` first, any held messages fail their publish callback with an error rather than being delivered. If another client publishes to a topic/channel that a disconnected client is subscribed to, the disconnected client will not receive those messages (fire-and-forget pattern). If you require guaranteed delivery, you can add your own receipt handling/delivery confirmation logic.
 
 
 ### License
