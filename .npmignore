@@ -4,6 +4,7 @@
 .gitattributes
 *.md
 *.bat
+test
 
 
 # https://github.com/github/gitignore/blob/master/Global/Windows.gitignore
