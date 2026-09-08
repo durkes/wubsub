@@ -61,7 +61,7 @@ Any value that survives `JSON.stringify`, including falsy ones like `0`, `''`, `
 Messages that a client publishes during an intermittent loss of connection will be held and sent once the connection is reestablished, in the order they were published. If the client gives up (retries exhausted) or you call `close()` first, any held messages fail their publish callback with an error rather than being delivered. If another client publishes to a topic/channel that a disconnected client is subscribed to, the disconnected client will not receive those messages (fire-and-forget pattern). If you require guaranteed delivery, you can add your own receipt handling/delivery confirmation logic.
 
 ##### How do I change the heartbeat interval?
-The server pings every 30 seconds and drops clients that do not answer; the client terminates and reconnects if it has heard nothing for that long. Both take a `heartbeat` option in milliseconds, and **the two values must match** — a client expecting a shorter interval than the server sends will reconnect on a loop. Pass `0` on both to disable the heartbeat.
+The server pings every 30 seconds and drops clients that do not answer; the client terminates and reconnects if it has heard nothing — a ping or any message — for five seconds longer than that, so a late ping or a brief stall costs nothing. Both take a `heartbeat` option in milliseconds, and **the client value must be at least the server value** or it will reconnect on a loop. Pass `0` on both to disable the heartbeat.
 
 ```js
 const server = wubsub.server({ port: 3000, heartbeat: 60000 });
