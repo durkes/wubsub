@@ -4,9 +4,12 @@ const client = wubsub.client({ url: 'ws://localhost:3000', retries: 10 }, (error
     if (error) {
         console.error(error.message);
     }
+});
 
-    // you should throw errors unless you implement custom error handling logic
-    throw error;
+// the same failure is also emitted as an error event; do not throw from either handler
+client.on('error', (error) => {
+    console.error('wubsub-client:', error.message);
+    process.exit(1);
 });
 
 // channels are created and destroyed automatically based on client subscriptions
