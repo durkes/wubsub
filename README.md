@@ -50,7 +50,9 @@ client.unsubscribe('channel2');
 
 ## FAQ
 ##### How does wubsub handle connection issues?
-By default, the client will try to reconnect to the server 10 times before returning an error. You can modify that limit to any integer or `Infinity`. See a more detailed [client example](examples/client.js) for configuring retries.
+By default, the client will try to reconnect to the server 10 times before giving up. You can modify that limit to any integer or `Infinity`. See a more detailed [client example](examples/client.js) for configuring retries.
+
+When the retries run out the client reports the failure rather than throwing: the client is an `EventEmitter` and emits an `error` event, which the optional `onError` callback passed as the second argument to `wubsub.client()` is attached to. Attach one or the other: as with any `EventEmitter`, an `error` with no listener is thrown. A client that has given up stays dead — `isDead()` returns `true`, `publish()` fails its callback and `subscribe()` throws. `isClosed()` reports the same for a client you closed yourself.
 
 ##### What kinds of messages can I publish?
 Any value that survives `JSON.stringify`, including falsy ones like `0`, `''`, `false` and `null`. Publishing with no message delivers `null`.
