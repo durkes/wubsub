@@ -52,6 +52,9 @@ client.unsubscribe('channel2');
 ##### How does wubsub handle connection issues?
 By default, the client will try to reconnect to the server 10 times before returning an error. You can modify that limit to any integer or `Infinity`. See a more detailed [client example](examples/client.js) for configuring retries.
 
+##### What kinds of messages can I publish?
+Any value that survives `JSON.stringify`, including falsy ones like `0`, `''`, `false` and `null`. Publishing with no message delivers `null`.
+
 ##### What happens to messages if the client gets disconnected?
 Messages that a client publishes during an intermittent loss of connection will be held and sent once the connection is reestablished. If another client publishes to a topic/channel that a disconnected client is subscribed to, the disconnected client will not receive those messages (fire-and-forget pattern). If you require guaranteed delivery, you can add your own receipt handling/delivery confirmation logic.
 
