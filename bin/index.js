@@ -7,7 +7,21 @@ if (portIndex < 0) portIndex = process.argv.indexOf('-p');
 
 let port;
 if (portIndex > -1) {
-    port = process.argv[portIndex + 1];
+    const value = process.argv[portIndex + 1];
+
+    // a missing value, or the next flag, is not a port
+    if (value === undefined || value.charAt(0) === '-') {
+        console.error('wubsub-server: invalid --port value (expected 0-65535)');
+        process.exit(1);
+    }
+
+    const parsed = Number(value);
+    if (!Number.isInteger(parsed) || parsed < 0 || parsed > 65535) {
+        console.error('wubsub-server: invalid --port value \'' + value + '\' (expected 0-65535)');
+        process.exit(1);
+    }
+
+    port = parsed;
 }
 
 const server = require('../lib/server')({ port: port });
